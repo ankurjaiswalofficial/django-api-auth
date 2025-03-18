@@ -13,7 +13,7 @@ This project demonstrates how to set up a Django project with API authentication
 1. **Clone the repository:**
 
     ```bash
-    git clone https://github.com/yourusername/django-api-auth.git
+    git clone https://github.com/ankurjaiswalofficial/django-api-auth.git
     cd django-api-auth
     ```
 
@@ -54,6 +54,8 @@ This project demonstrates how to set up a Django project with API authentication
     - API endpoints: `http://127.0.0.1:8000/api/`
     - API authentication: `http://127.0.0.1:8000/api-auth/`
 
+# For accessing api/items endpoint, include the following header in your HTTP request:
+# Authorization: Token <authToken>
 ## Project Structure
 
 - `api_auth_proj/`: Main project directory.
