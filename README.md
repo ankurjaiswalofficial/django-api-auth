@@ -54,8 +54,18 @@ This project demonstrates how to set up a Django project with API authentication
     - API endpoints: `http://127.0.0.1:8000/api/`
     - API authentication: `http://127.0.0.1:8000/api-auth/`
 
-# For accessing api/items endpoint, include the following header in your HTTP request:
-# Authorization: Token <authToken>
+8. **Create an API key:**
+
+    To create an API key, send a POST request to the `http://127.0.0.1:8000/api-key/` endpoint. Include any required data in the request body as specified by the API documentation.
+
+9. **Access endpoints using the API key:**
+
+    Include the following header in your HTTP requests to access protected endpoints:
+
+    ```
+    X-API-KEY: <your-api-key>
+    ```
+
 ## Project Structure
 
 - `api_auth_proj/`: Main project directory.

@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',  # Added rest_framework.authtoken
     'myapp',
+    'apikey_auth',  # New app for API key authentication
 ]
 
 MIDDLEWARE = [
@@ -130,6 +131,7 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.BasicAuthentication',
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.TokenAuthentication',
+        'apikey_auth.authentication.APIKeyAuthentication',  # Custom API key authentication
     ],
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated',

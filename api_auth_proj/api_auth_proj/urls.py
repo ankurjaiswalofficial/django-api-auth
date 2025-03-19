@@ -27,4 +27,5 @@ urlpatterns = [
     path('api/', include(router.urls)),
     path('api-auth/', include('rest_framework.urls')),
     path('', include('myapp.urls')),  # Include myapp URLs
+    path('apikey-auth/', include('apikey_auth.urls')),
 ]
