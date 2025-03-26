@@ -66,6 +66,53 @@ This project demonstrates how to set up a Django project with API authentication
     X-API-KEY: <your-api-key>
     ```
 
+## Hawk Authentication
+
+### Generate Hawk Credentials
+
+To generate Hawk credentials (ID and key), send a `GET` request to the `/auth/hawk-auth/` endpoint. Ensure the user is authenticated.
+
+**Request:**
+```http
+GET /auth/hawk-auth/ HTTP/1.1
+Host: example.com
+Authorization: Bearer <your-access-token>
+```
+
+**Response:**
+```json
+{
+    "id": "generated-hawk-id",
+    "key": "generated-hawk-key"
+}
+```
+
+### Authenticate Using Hawk
+
+To authenticate a request using Hawk, include the `Authorization` header in your request. The header must be generated using the Hawk protocol.
+
+**Request:**
+```http
+POST /auth/hawk-auth/ HTTP/1.1
+Host: example.com
+Authorization: Hawk id="<hawk-id>", mac="<generated-mac>", ts="<timestamp>", nonce="<nonce>"
+Content-Type: application/json
+```
+
+**Response (Success):**
+```json
+{
+    "message": "Hawk authentication successful"
+}
+```
+
+**Response (Failure):**
+```json
+{
+    "error": "Invalid Hawk credentials"
+}
+```
+
 ## Project Structure
 
 - `api_auth_proj/`: Main project directory.

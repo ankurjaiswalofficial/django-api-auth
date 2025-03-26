@@ -28,4 +28,5 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls')),
     path('', include('myapp.urls')),  # Include myapp URLs
     path('apikey-auth/', include('apikey_auth.urls')),
+    path('auth/', include('hawk_auth.urls')),  # Include hawk_auth URLs
 ]

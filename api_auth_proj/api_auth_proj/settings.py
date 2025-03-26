@@ -37,13 +37,17 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # 'corsheaders',
     'rest_framework',
     'rest_framework.authtoken',  # Added rest_framework.authtoken
-    'myapp',
+    'myapp', # New app for Basic authentication and Token Authentication
     'apikey_auth',  # New app for API key authentication
+    'hawk_auth',  # New app for Hawk authentication
 ]
 
 MIDDLEWARE = [
+    'api_auth_proj.middleware.secure_api_access',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -132,9 +136,45 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.TokenAuthentication',
         'apikey_auth.authentication.APIKeyAuthentication',  # Custom API key authentication
+        'hawk_auth.authentication.HawkAuthentication',  # Custom Hawk authentication
     ],
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated',
     ],  
 }
+###############################################
+
+SECURE_ALLOWED_ORIGINS = [
+    "http://localhost:4000",
+]
+# Whitelisted IPs (optional)
+SECURE_ALLOWED_IPS = [
+    "127.0.0.1",         # Localhost
+    # "203.0.113.25",    # Add your frontend IPs here
+]
+ # Set to True if you want to restrict by IP too
+SECURE_ENABLE_IP_CHECK = False 
+
+###############################################
+
+CORS_ALLOW_CREDENTIALS = True
+
+CORS_ALLOWED_ORIGINS = SECURE_ALLOWED_ORIGINS
+
+CORS_ALLOW_HEADERS = [
+    "content-type",
+    "authorization",
+    "x-csrftoken",
+    "accept",
+    "origin",
+]
+
+CORS_ALLOW_METHODS = [
+    "GET",
+    "POST",
+    "PUT",
+    "PATCH",
+    "DELETE",
+    "OPTIONS",
+]
 
