@@ -66,6 +66,106 @@ This project demonstrates how to set up a Django project with API authentication
     X-API-KEY: <your-api-key>
     ```
 
+## Frontend Integration
+
+This project includes a frontend application that interacts with the Django API. The frontend is built using modern JavaScript frameworks and communicates with the backend via RESTful API endpoints.
+
+### Setting Up the Frontend
+
+1. **Navigate to the frontend directory:**
+
+    ```bash
+    cd frontend
+    ```
+
+2. **Install dependencies:**
+
+    ```bash
+    npm install
+    ```
+
+3. **Run the development server:**
+
+    ```bash
+    npm start
+    ```
+
+4. **Access the frontend application:**
+
+    Open your browser and navigate to `http://localhost:3000`.
+
+### Frontend Features
+
+- User authentication using API keys and Hawk authentication.
+- Interactive UI for testing API endpoints.
+- Error handling and user-friendly messages for failed requests.
+
+## CORS Configuration
+
+To enable cross-origin requests between the frontend and backend, CORS (Cross-Origin Resource Sharing) has been configured in the Django project.
+
+### CORS Setup
+
+1. **Install the `django-cors-headers` package:**
+
+    ```bash
+    pip install django-cors-headers
+    ```
+
+2. **Add `corsheaders` to `INSTALLED_APPS` in `settings.py`:**
+
+    ```python
+    INSTALLED_APPS = [
+        ...existing code...
+        'corsheaders',
+    ]
+    ```
+
+3. **Add the `CorsMiddleware` to the middleware stack in `settings.py`:**
+
+    ```python
+    MIDDLEWARE = [
+        'corsheaders.middleware.CorsMiddleware',
+        ...existing code...
+    ]
+    ```
+
+4. **Configure allowed origins in `settings.py`:**
+
+    ```python
+    CORS_ALLOWED_ORIGINS = [
+        "http://localhost:3000",  # Frontend URL
+    ]
+    ```
+
+This setup ensures that the frontend can communicate with the backend without encountering CORS errors.
+
+## Custom Middleware
+
+A custom middleware has been implemented to log API requests and responses for debugging and monitoring purposes.
+
+### Middleware Implementation
+
+1. **Create the middleware file:**
+
+    The middleware is located in `myapp/middleware.py`.
+
+2. **Add the middleware to the stack in `settings.py`:**
+
+    ```python
+    MIDDLEWARE = [
+        ...existing code...
+        'myapp.middleware.RequestResponseLoggingMiddleware',
+    ]
+    ```
+
+3. **Middleware Functionality:**
+
+    - Logs incoming requests, including headers and body.
+    - Logs outgoing responses, including status codes and response data.
+
+This middleware is useful for debugging and ensuring the API behaves as expected during development.
+
 ## Hawk Authentication
 
 ### Generate Hawk Credentials
